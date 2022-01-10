@@ -33,6 +33,15 @@ public class Recipe {
     @OneToOne(cascade = CascadeType.ALL) //this defines the relationship
     private Notes notes;
 
+    // If we remove @JoinTable we will get two table Category_recipes and Recipe_Categories table
+    // JoinTable tells hibernate to add single table and map both , as one table is enough
+    @JoinTable(name = "recipe_category", // table name to create
+            joinColumns = @JoinColumn(name = "recipe_id"), // join column
+            inverseJoinColumns = @JoinColumn(name = "category_id") // opposite join column
+    )
+    @ManyToMany
+    private Set<Category> categories;
+
     // each recipe will have many ingredients
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
@@ -131,5 +140,13 @@ public class Recipe {
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
