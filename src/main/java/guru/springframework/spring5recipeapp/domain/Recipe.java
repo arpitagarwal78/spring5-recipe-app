@@ -1,7 +1,7 @@
 package guru.springframework.spring5recipeapp.domain;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,6 +17,8 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
 
     // EnumType.ORDINAL -> it stores in 0, 1 , 2 index order of enum string
@@ -40,11 +42,11 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id") // opposite join column
     )
     @ManyToMany
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
     // each recipe will have many ingredients, if ingredient deleted recipe deleted
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     public Long getId() {
         return id;
