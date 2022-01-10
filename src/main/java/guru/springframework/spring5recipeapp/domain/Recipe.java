@@ -18,8 +18,12 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    //todo
-    // private Difficulty difficulty;
+
+    // EnumType.ORDINAL -> it stores in 0, 1 , 2 index order of enum string
+    // problem if we change position it will screw up database values
+    // thus we are using EnumType.STRING to store actual value
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
 
     // blob field bigger object
     @Lob
@@ -95,6 +99,14 @@ public class Recipe {
 
     public void setDirections(String directions) {
         this.directions = directions;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     public Byte[] getImage() {
