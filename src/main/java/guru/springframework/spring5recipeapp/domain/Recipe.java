@@ -42,7 +42,7 @@ public class Recipe {
     @ManyToMany
     private Set<Category> categories;
 
-    // each recipe will have many ingredients
+    // each recipe will have many ingredients, if ingredient deleted recipe deleted
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
 
