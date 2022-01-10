@@ -1,6 +1,8 @@
 package guru.springframework.spring5recipeapp.domain;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -26,6 +28,10 @@ public class Recipe {
     // relationship OneToOne
     @OneToOne(cascade = CascadeType.ALL) //this defines the relationship
     private Notes notes;
+
+    // each recipe will have many ingredients
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     public Long getId() {
         return id;
@@ -105,5 +111,13 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
