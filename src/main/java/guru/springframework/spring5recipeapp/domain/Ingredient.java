@@ -12,7 +12,10 @@ public class Ingredient {
 
     private String description;
     private BigDecimal amount;
-    // private UnitOfMeasure uom;
+
+    // I want it as one to one and fetch everytime from database
+    @OneToOne(fetch = FetchType.EAGER)
+    private UnitOfMeasure uom;
 
     // no cascade as we can freely delete ingredients without deleting recipe
     @ManyToOne
@@ -48,5 +51,13 @@ public class Ingredient {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public UnitOfMeasure getUom() {
+        return uom;
+    }
+
+    public void setUom(UnitOfMeasure uom) {
+        this.uom = uom;
     }
 }
