@@ -1,8 +1,13 @@
 package guru.springframework.spring5recipeapp.domain;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Set;
 
+
+@Data
+@EqualsAndHashCode(exclude = {"recipes"}) // it will exclude equals and hash code of recipes
 @Entity
 public class Category {
 
@@ -15,27 +20,11 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
 
-    public Long getId() {
-        return id;
+    public Category() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    protected boolean canEqual(final Object other) {
+        return other instanceof Category;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    }
 }
