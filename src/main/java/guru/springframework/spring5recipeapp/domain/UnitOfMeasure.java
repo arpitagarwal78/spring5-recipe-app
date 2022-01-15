@@ -8,7 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 public class UnitOfMeasure {
 
