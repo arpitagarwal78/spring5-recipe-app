@@ -36,15 +36,8 @@ jobs:
  
       - run: mvn dependency:go-offline
  
-      # Then run your tests! and then code coverage - using codeCov to check this report
-      - run: mvn integration-test cobertura:cobertura
-
-      - store_test_results:
-          path: target/surefire-reports
-
-      - run:
-          name: Send to CodeCov
-          command: bash <(curl -s http://codecov.io/bash)
+      # Then run your tests!
+      - run: mvn integration-test
  
 workflows:
   # Below is the definition of your workflow.
